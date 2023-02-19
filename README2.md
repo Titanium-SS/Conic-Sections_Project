@@ -6,5 +6,3 @@ These Tables contain the questions that get displayed when the program has displ
 **NOTE:** These tables are present in the datbase named as *Conic* made on MySQL.
 
 ![ConicDB](DatabaseConic.png)
-
-
