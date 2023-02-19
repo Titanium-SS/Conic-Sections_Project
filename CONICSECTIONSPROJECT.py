@@ -1,22 +1,26 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import mysql.connector
-mydb=mysql.connector.connect(host='localhost',user='root',passwd='admin', database='Conic')
+import math
+mydb=mysql.connector.connect(host='localhost',user='root',passwd='singh2003',database='Conic')
 mycursor=mydb.cursor()
 x=np.linspace(-80,80,400)
 y=np.linspace(-80,80,400)
 x,y=np.meshgrid(x,y)
+
 def axes():
     plt.axhline(0,alpha=0.5)
     plt.axvline(0,alpha=0.5)
- 
+
 def conic():
     while True:
         print("Which geometrical figure do you want to plot[Circle,Parabola,Ellipse,Hyperbola,Line]:")
-
         print("Enter 'None' if you want to quit.")
         q=input()
         flag=0
+
+
+
         if q.capitalize()=='Circle':
             r=int(input('Enter radius:'))
             a=int(input('Enter x co-ordinate of centre:'))
@@ -32,24 +36,23 @@ def conic():
                 print(i)
             print()
             print('Type 0 to plot another conic section.')
-
             ans=int(input('....'))
             if ans==0:
                 flag=-1
- 
             else:
                 x1=int(input('Enter x co-ordinate of point:'))
                 y1=int(input('Enter y co-ordinate of point:'))
                 pos=((x1-a)**2/r**2 + (y1-b)**2/r**2) -1
                 if pos<0:
                     print('Point lies inside circle')
- 
                 elif pos==0:
                     print('Point lies on circle')
                     print()
                 else:
                     print('Point lies outside circle')
                     print()
+    
+
 
 
         elif q.capitalize()=='Parabola':
@@ -93,34 +96,35 @@ def conic():
                 else:
                     x1=int(input('Enter x co-ordinate of point:'))
                     y1=int(input('Enter y co-ordinate of point:'))
-                    if graph==1:
-                        pos=(y1)**2 - 4*a*x1
-                        if pos<0:
-                            print('Point lies inside parabola')
-                            print()
-                            pass
-                        elif pos==0:
-                            print('Point lies on parabola')
-                            print()
-                            pass
-                        else:
-                            print('Point lies outside parabola')
-                            print()
-                            pass
+                if graph==1:
+                    pos=(y1)**2 - 4*a*x1
+                    if pos<0:
+                        print('Point lies inside parabola')
+                        print()
+                        pass
+                    elif pos==0:
+                        print('Point lies on parabola')
+                        print()
+                        pass
                     else:
-                        pos=(x1)**2 - 4*a*x1 
-                        if pos<0:
-                            print('Point lies inside parabola')
-                            print()
-                            pass
-                        elif pos==0:
-                            print('Point lies on parabola')
-                            print()
-                            pass
-                        else:
-                            print('Point lies outside parabola')
-                            print()
-                            pass
+                        print('Point lies outside parabola')
+                        print()
+                        pass
+                else:
+                    pos=(x1)**2 - 4*a*x1
+                    if pos<0:
+                        print('Point lies inside parabola')
+                        print() 
+                        pass
+                    elif pos==0:
+                        print('Point lies on parabola')
+                        print()
+                        pass
+                    else:   
+                        print('Point lies outside parabola')
+                        print()
+                        pass
+
 
 
         elif q.capitalize()=='Ellipse':
@@ -131,15 +135,15 @@ def conic():
             axes()
             if a>b:
                 plt.contour(x,y,((x-a1)**2/a**2+ (y-b1)**2/b**2),[1],colors='k')
-                e=np.sqrt(1- b**2/a**2)  #eccentricity
-                plt.plot((a+a1)*e,b1,'.',(-a+a1)*e,b1,'.')   #Foci
+                e=np.sqrt(1- b**2/a**2) #eccentricity
+                plt.plot((a+a1)*e,b1,'.',(-a+a1)*e,b1,'.') #Foci
                 plt.axvline((a+a1)/e,color='green'),plt.axvline(-(a+a1)/e,color='yellow') #Directrices
                 plt.show()
                 lr=2*(b**2)/a
             else:
                 plt.contour(x,y,((x-a1)**2/a**2+ (y-b1)**2/b**2),[1],colors='k')
-                e=np.sqrt(1- a**2/b**2)  #eccentricity
-                plt.plot(a1,(b+b1)*e,'.',a1,(-b+b1)*e,'.')  #Foci
+                e=np.sqrt(1- a**2/b**2) #eccentricity
+                plt.plot(a1,(b+b1)*e,'.',a1,(-b+b1)*e,'.') #Foci
                 plt.axhline((b+a1)/e,color='green'),plt.axhline(-(b+a1)/e,color='yellow') #Directrices
                 plt.show()
                 lr=2*(a**2)/b
@@ -164,7 +168,10 @@ def conic():
                         print(lr)
                         print()
                         pass
- 
+
+
+
+
         elif q.capitalize()=='Hyperbola':
             a=int(input('Enter length of Tranverse axis:'))
             b=int(input('Enter length of Conjugate axis:'))
@@ -179,7 +186,7 @@ def conic():
                 data=mycursor.fetchall()
                 for i in data:
                     print(i)
-                print()
+                print( )
                 print('Type 0 to plot another conic section.')
                 ans=int(input('....'))
                 if ans==0:
@@ -194,7 +201,8 @@ def conic():
                         print(lr)
                         print()
                         pass
- 
+
+
 
         elif q.capitalize()=='Line':
             print('Enter co-ordinates of any two points lying on the line.')
@@ -212,7 +220,7 @@ def conic():
                 data=mycursor.fetchall()
                 for i in data:
                     print(i)
-                print()
+                print( )
                 print('Type 0 to plot another conic section.')
                 ans=int(input('....'))
                 if ans==0:
@@ -224,7 +232,6 @@ def conic():
                         print()
                         pass
                     else:
-                        import math
                         theta= math.atan(m)
                         f=math.degrees(theta)
                         print('The angle made with x axis is:',f,'degrees')
@@ -232,19 +239,18 @@ def conic():
                         pass
 
 
+
         elif q.capitalize()=='None':
             flag=-1
-            break 
-
+            break   
         
         else:
             print('Conic section Unavavailable!!')
-        
-        return flag
-    flag1=conic()
-    while True:
-        if flag1==-1:
-            break
-        else:
-            conic()
-            continue
+    return flag
+flag1=conic()
+while True:
+    if flag1==-1:
+        break
+    else:
+        conic()
+        continue
