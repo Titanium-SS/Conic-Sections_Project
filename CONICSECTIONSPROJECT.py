@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import mysql.connector
 import math
+
+# Connecting to mysql database
 mydb=mysql.connector.connect(host='localhost',user='root',passwd='singh2003',database='Conic')
 mycursor=mydb.cursor()
 x=np.linspace(-80,80,400)
@@ -20,7 +22,7 @@ def conic():
         flag=0
 
 
-
+        # code block to handle operations regarding circle
         if q.capitalize()=='Circle':
             r=int(input('Enter radius:'))
             a=int(input('Enter x co-ordinate of centre:'))
@@ -54,7 +56,7 @@ def conic():
     
 
 
-
+        # code block to handle operations regarding parabola
         elif q.capitalize()=='Parabola':
             a=eval(input('Enter co-ordinates of focus[x,y]:'))
             a1=int(input('Enter x co-ordinate of vertex:'))
@@ -126,7 +128,7 @@ def conic():
                         pass
 
 
-
+        # code block to handle operations regarding Ellipse
         elif q.capitalize()=='Ellipse':
             a=int(input('Enter length of horizontal axis:'))
             b=int(input('Enter length of vertical axis:'))
@@ -171,7 +173,7 @@ def conic():
 
 
 
-
+        # code block to handle operations regarding hyperbola
         elif q.capitalize()=='Hyperbola':
             a=int(input('Enter length of Tranverse axis:'))
             b=int(input('Enter length of Conjugate axis:'))
@@ -203,7 +205,7 @@ def conic():
                         pass
 
 
-
+        # code block to handle operations regarding a line
         elif q.capitalize()=='Line':
             print('Enter co-ordinates of any two points lying on the line.')
             a1=int(input('Enter x co-ordinate of the first point:'))
